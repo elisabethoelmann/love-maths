@@ -1,11 +1,11 @@
 // Wait for the DOM to finish loading before running the game
 // Get the button elements and add event listeners to them
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     let buttons = document.getElementsByTagName("button");
 
     for (let button of buttons) {
-        button.addEventListener("click", function() {
+        button.addEventListener("click", function () {
             if (this.getAttribute("data-type") === "submit") {
                 alert("You clicked Submit!");
             } else {
@@ -42,8 +42,21 @@ function checkAnswer() {
 
 }
 
+/**
+ * Gets the operands (the numbers) and the operator (plus, minus, etc.) 
+ * directly from the dom and returns the correct answer
+ */
 function calculateCorrectAnswer() {
+    let operand1 = parseInt(document.getElementByID('operand1').innerText);
+    let operand2 = parseInt(document.getElementByID('operand2').innerText);
+    let operator = document.getElementByID("operator").innerText;
 
+    if (operator === "+") {
+        return [operand1 + operand2, "addition"];
+    }   else {
+        alert(`unimplemented operator $(operator)`);
+        throw `unimplemented operator $(operator).Aborting!`;
+    }
 }
 
 function incrementScore() {
@@ -59,7 +72,7 @@ function displayAdditionQuestion(operand1, operand2) {
     document.getElementById('operand1').textContent = operand1;
     document.getElementById('operand2').textContent = operand2;
     document.getElementById('operator').textContent = "+";
-    
+
 }
 
 function displaySubtractQuestion() {
@@ -67,5 +80,5 @@ function displaySubtractQuestion() {
 }
 
 function displayMultiplyQuestion() {
-    
+
 }
